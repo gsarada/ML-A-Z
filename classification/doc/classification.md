@@ -38,3 +38,27 @@ The "Mountain" Effect The Gaussian RBF (Radial Basis Function) Kernel acts like 
 3. The "Hyperplane" and the Return to 2DOnce the data is in 3D, the SVR fits a Hyperplane (a flat sheet) through the points.The Intersection: Where this flat 3D sheet cuts through our "RBF mountain" creates a curved line of intersection.The Result: When we project that intersection line back down to our original 2D plot, it appears as a perfectly fitted non-linear trend line that follows the curve of the data.
 4. The "Kernel Trick" (Computational Efficiency)While the 3D visualization helps us understand why it works, calculating everything in 3D is very slow.The Shortcut: In reality, SVR uses the Kernel Trick. This allows the algorithm to calculate the relationships between points as if they were in a higher dimension without actually having to build the 3D model.Outcome: You get a sophisticated, non-linear model (including the "epsilon-insensitive tube" that ignores small errors) while keeping the math fast and efficient.Key Takeaway: Non-linear SVR finds a linear solution in a higher-dimensional space and "projects" it back as a curved solution in your original space.
 ![Non Linear SVR](nonlinear-SVR.png)
+
+## Bayes Theorem
+- Formula : P(A|B) = P(B|A) * p(A) / p(B)
+- Illustration: <br>
+  | Fact              | Formula conversion       |
+  | :---              | :---                     |
+  | Machine1: 30 /hr  |  P(Machine1)=30/50 = 0.6 |
+  | Machine2: 20 /hr  |  P(Machine2)=20/50 = 0.4 |
+  | Out of all produced parts: 1% are defective | P(Defective)=0.01 |
+  | Out of all defective parts: <br> 50% come from machine1 and <br> 50% come from machine2. | P(Machine1\|Defective) = 0.5 <br> P(Machine2\|Defective) = 0.5 |
+  | Question: What is the probability that a part produced by machine2 is defective | P(Defective\|Machine2) = ?  |
+  | Answer - <br> P(Defective\|Machine2)  | P(Machine2\|Defective) * P(Defective) / P(Machine2) <br> = 0.5 * 0.01 / 0.4 = 0.0125. |
+
+## Naive Bayes Classifier
+1. The Core ConceptNaïve Bayes is a probabilistic supervised learning algorithm. It classifies a new data point by calculating the probability that it belongs to each possible category based on its "features" (e.g., Age and Salary) and then choosing the category with the highest probability.
+2. The Plan of Attack: Bayes' Theorem <br>
+To classify a new point ($X$), we calculate the Posterior Probability for every category. The formula used is:<br>$$P(\text{Class}|X) = \frac{P(X|\text{Class}) \times P(\text{Class})}{P(X)}<br>$$The Four Components:<br>Prior Probability $P(\text{Class})$: The overall likelihood of a category occurring, regardless of features (e.g., $10 \text{ walkers} / 30 \text{ total people}$).<br>Marginal Likelihood $P(X)$: The probability that any new random point will have features similar to our new point. We calculate this by drawing a circle (radius) around the new point and counting all points inside.<br>Likelihood $P(X|\text{Class})$: Among people who already belong to the class (e.g., just the walkers), what is the probability they fall within the circle of similarity?<br>Posterior Probability $P(\text{Class}|X)$: The final result we are looking for—the probability that this specific point belongs to the class given its features.
+3. Step-by-Step Execution <br>Imagine we are deciding if a 25-year-old earning $\$30,000$ Walks or Drives to work.
+  - Step 1: Calculate Probability for "Walks"Prior: How many people walk in total?Marginal Likelihood: Draw a circle around the new point. What percentage of the total population is inside that circle?Likelihood: Of the people who walk, how many are inside that circle?Result: Plug these into the formula to get the probability (e.g., $75\%$).- Step 2: Calculate Probability for "Drives"Perform the exact same math, but specifically for the "Drives" category (e.g., $25\%$).
+  - Step 3: Compare and Classify Compare the results: $75\%$ (Walks) vs. $25\%$ (Drives).Since $75\% > 25\%$, the algorithm classifies the new point as "Walks."
+  4. Key Takeaways for Future Reference<br>The "Radius": The size of the circle you draw around the new point is a parameter you decide. It determines who is considered "similar" to your new observation.<br>Why "Naïve"?: It is called "Naïve" because it assumes that every feature (like Age) is completely independent of every other feature (like Salary), which isn't always true in real life, but the math still works surprisingly well.<br>Scalability: While the example used 2 features (Age, Salary), Naïve Bayes can handle hundreds of features using the same logic.
+
+  ## DecisionTree and RandomForest
+  Refer regression.md for the explanation.

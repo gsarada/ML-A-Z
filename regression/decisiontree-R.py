@@ -2,17 +2,17 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score
+from sklearn.tree import DecisionTreeRegressor
 
 #load dataset
-dataset = pd.read_csv('../Position_Salaries.csv')
+dataset = pd.read_csv('datasets/Position_Salaries.csv')
 X = dataset.iloc[:, 1:-1].values
 y = dataset.iloc[:, -1].values
 
 # Feature scaling is not required here because the decision tree model simply groups the features so the ranges does not matter
 #Train decision tree model
-regressor = RandomForestRegressor(n_estimators=10, random_state=0)
+regressor = DecisionTreeRegressor(random_state=0)
 regressor.fit(X, y)
 
 #Predict a new value

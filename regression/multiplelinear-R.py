@@ -8,7 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LinearRegression
 
 #load dataset
-dataset = pd.read_csv('./50_Startups.csv')
+dataset = pd.read_csv('datasets/50_Startups.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 

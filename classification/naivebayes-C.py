@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.svm import LinearSVC, SVC
+from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 scaler = None
@@ -41,11 +41,7 @@ def main(is_linear: False):
     X_test_scaled = scaler.transform(X_test)
 
     # Train the model
-    if is_linear:
-        classifier = SVC(kernel="linear") #LinearSVC()
-    else:
-        classifier = SVC(kernel="rbf")
-    
+    classifier = GaussianNB()
     classifier.fit(X_train_scaled, y_train)
 
     # Predict new observation
